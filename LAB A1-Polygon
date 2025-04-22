@@ -1,0 +1,43 @@
+class Polygon:
+    def __init__(self, no_of_sides):
+        self.n = no_of_sides
+        #self.sides = [0 for i in range(no_of_sides)]
+        self.sides = []
+
+    def inputSides(self):
+        #self.sides = [float(input("Enter the length of side"+str(i+1)+" : " )) for i in range(self.n)]
+        for i in range(self.n):
+            side = float(input("Enter the length of a side : " ))
+            self.sides.append(side)
+        
+    def dispSides(self):
+        for i in range(self.n):
+            print("length of Side",i+1,"is",self.sides[i])
+    
+    def findArea(self):
+        pass
+    
+    def calculateperimeter(self):
+        s = sum(self.sides)/2
+        return s
+        
+
+
+class Triangle(Polygon):
+    def __init__(self):
+        super().__init__(3)
+        
+    def findArea(self):
+        #calculate semi perimeter
+        s = self.calculateperimeter()
+        # area = square root of s*(s-a)*(s-b)*(s-c)*..........   where a, b,c,d,... are sides
+        
+        a,b,c = self.sides
+        area = (s*(s-a)*(s-b)*(s-c))**0.5
+        print('The area of triangle is %0.2f' %area)
+
+
+t = Triangle()
+t.inputSides()
+t.dispSides()
+t.findArea()
