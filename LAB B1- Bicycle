@@ -1,0 +1,16 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv('datasets/FremontBridge.csv', index_col='Date', parse_dates=True)  
+data.columns = ['Total', 'East', 'West']
+
+by_weekday = data.groupby(data.index.dayofweek).mean()
+print(by_weekday)
+by_weekday.index = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun']
+by_weekday.plot(style=[':', '--', '-'])
+
+weekend_array = np.where(data.index.dayofweek < 5, 'Weekday', 'Weekend')
+print(weekend_array)
+by_time = data.groupby([weekend_array, data.index.time]).mean()
+print(by_time)
+by_time.loc['Weekday'].plot(title='Weekdays', style=[':', '--', '-'])
+by_time.loc['Weekend'].plot(title='Weekends', style=[':', '--', '-'])
