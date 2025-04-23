@@ -1,0 +1,27 @@
+import numpy as np
+import pandas as pd
+churn_data = pd.read_csv('datasets/churn.csv', index_col=0)
+#Count total number of duplicate records in the dataframe
+print(len(churn_data) - len(churn_data.drop_duplicates()))
+print('-----------------------------------------------------')
+#count duplicate records based on attribute (customerID)
+df = churn_data['customerID'].duplicated()
+print(sum(df))                         #add all true values
+print('-----------------------------------------------------')
+#missing values in each column
+print(churn_data.isnull().sum()) 
+print('-----------------------------------------------------')
+#missing values in column Totalcharges 
+print(churn_data['TotalCharges'].isnull().sum())
+print('-----------------------------------------------------')
+#Average monthly charge paid by a customer for the services he/she has signed up for
+print(churn_data['MonthlyCharges'].mean())
+print('-----------------------------------------------------')
+#Display Records having “1@#” under the variable Dependents
+print(churn_data.loc[churn_data['Dependents']=='1@#'])
+print('-----------------------------------------------------')
+#Replace null values by median value or by max count class category
+print(churn_data.isnull().any())
+churn_data = churn_data.apply(lambda x:x.fillna(x.median()) if x.dtype=='float' else x.fillna(x.value_counts().index[0]))
+print('-----------------------------------------------------')
+print(churn_data.isnull().any())
