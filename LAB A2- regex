@@ -1,0 +1,22 @@
+import re 
+
+text = "xyz@gmil.com and 999@99ad.com and abc_987@vvce.ac.in are the mail ids. (897)-012-3456  ext.23 and 897.012-3456x23 are numbers"
+emailRegex = re.compile('[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}')
+L = emailRegex.findall(text)
+for email in L:
+    print(email)
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+import re
+
+p = input("Input your password: ")
+
+if (5 <= len(p) <= 14 and
+    re.search("[a-z]", p) and
+    re.search("[A-Z]", p) and
+    re.search("[0-9]", p) and
+    re.search("[$#@_]", p)):
+    print("valid password")
+else:
+    print("invalid password")
