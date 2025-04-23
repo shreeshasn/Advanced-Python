@@ -1,0 +1,19 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+births = pd.read_csv('./Datasets/births.csv') 
+
+births.pivot_table('births', index='year', columns='gender', aggfunc='sum').plot()
+plt.ylabel('total births per year');
+
+births['decade'] = 10 * (births['year'] // 10)
+Q1 = births.quantile(0.25)
+Q3 = births.quantile(0.75)
+IQR = Q3 - Q1
+births = births[~((births < (Q1 - 1.5 * IQR)) |(births > (Q3 + 1.5 * IQR))).any(axis=1)]
+births['day'] = births['day'].astype(int)
+births.index = pd.to_datetime(10000 * births.year + 100 * births.month + births.day, format='%Y%m%d')
+births['dayofweek'] = births.index.dayofweek
+births.pivot_table('births', index='dayofweek', columns='decade', aggfunc='mean').plot()
