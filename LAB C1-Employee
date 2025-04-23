@@ -1,0 +1,27 @@
+class employee:
+    count = 0    
+    def __init__(self):
+        self.name = None
+        self.place = None
+        self.department = None
+        employee.count = employee.count + 1
+        self.eid = 'EMP'+ str(employee.count)
+        
+    def update(self):
+        self.name = input("Enter Name : ")
+        self.place = input("Enter Place : ")
+        self.department = input("Enter department : ")
+    
+    def display(self):
+        print('Employee ID: ', self.eid, 'Employee Name: ',self.name, 'Employee Place: ',self.place, 'Employee Dept: ',self.department)
+        
+n = int (input("Enter the total number of Employees"))
+emp_list = []
+for i in range(n):
+    emp = employee()
+    emp.update()
+    emp_list.append(emp)
+    
+print("The Employee Details are :")    
+for emp in emp_list:
+    emp.display()
