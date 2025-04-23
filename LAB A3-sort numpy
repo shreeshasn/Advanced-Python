@@ -1,0 +1,21 @@
+# Importing the NumPy library
+import numpy as np
+
+# Defining the data types for the structured array
+data_type = [('name', 'S15'), ('class', int), ('height', float)]
+
+# Creating a structured array 'students' using the defined data type and provided details
+
+students = np.zeros(4, dtype= data_type)
+
+students['name'] = ['amith', 'dhanush', 'hemanth', 'hitesh']
+students['class'] = [5,6,5,5]
+students['height'] = [48.5, 53, 42.5, 40]
+
+# Displaying the original structured array
+print("Original array:")
+print(students)
+
+# Sorting the structured array by 'height' field
+print("Sort by height")
+print(np.sort(students, order='height')) 
